@@ -1,0 +1,379 @@
+# Copyright (C) 2026 Enrique
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Child Theme Maker 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/perezamadorluisenrique-gif/child-theme-maker/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-09T00:24:53+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: child-theme-maker\n"
+
+#. Plugin Name of the plugin
+#: child-theme-maker.php
+#: includes/class-ctmaker-admin.php:54
+#: includes/class-ctmaker-admin.php:458
+msgid "Child Theme Maker"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: child-theme-maker.php
+msgid "https://github.com/perezamadorluisenrique-gif/child-theme-maker"
+msgstr ""
+
+#. Description of the plugin
+#: child-theme-maker.php
+msgid "Create a safe child theme for any classic or block theme in three steps, carry over your Customizer and Site Editor settings, override parent templates and download the child as a .zip."
+msgstr ""
+
+#. Author of the plugin
+#: child-theme-maker.php
+msgid "Enrique"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:55
+msgid "Child Theme"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:70
+#: includes/class-ctmaker-admin.php:685
+msgid "Create child theme"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:217
+msgid "Sorry, you are not allowed to create themes."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:224
+#: includes/class-ctmaker-admin.php:277
+msgid "Pick an installed parent theme."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:250
+msgid "Sorry, you are not allowed to export themes."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:257
+#: includes/class-ctmaker-admin.php:473
+msgid "That child theme is not installed."
+msgstr ""
+
+#. translators: %s: folder name.
+#: includes/class-ctmaker-admin.php:299
+#: includes/class-ctmaker-generator.php:195
+#, php-format
+msgid "A theme folder named \"%s\" already exists. Pick another folder name."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:315
+msgid "Could not write the child theme files. Check that wp-content/themes is writable."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:322
+msgid "The files were written, but WordPress does not recognize the new theme. Check the themes folder."
+msgstr ""
+
+#. translators: 1: child theme name, 2: parent theme name.
+#: includes/class-ctmaker-admin.php:328
+#, php-format
+msgid "Created %1$s, a child theme of %2$s."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:337
+msgid "It is now your active theme."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:352
+msgid "Sorry, you are not allowed to change theme settings."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:374
+msgid "Select at least one file to copy."
+msgstr ""
+
+#. translators: 1: number of files, 2: list of files.
+#: includes/class-ctmaker-admin.php:391
+#, php-format
+msgid "Copied %1$d file to the child theme: %2$s. Edit the copy; the parent original stays untouched."
+msgid_plural "Copied %1$d files to the child theme: %2$s. Edit the copies; the parent originals stay untouched."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: list of files.
+#: includes/class-ctmaker-admin.php:400
+#, php-format
+msgid "Already in the child theme, left as they are: %s."
+msgstr ""
+
+#. translators: %s: list of files.
+#: includes/class-ctmaker-admin.php:404
+#, php-format
+msgid "Could not copy: %s."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:418
+msgid "Customizer settings and menu locations"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:421
+msgid "Additional CSS"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:424
+msgid "widgets"
+msgstr ""
+
+#. translators: %d: number of templates, template parts and style sets.
+#: includes/class-ctmaker-admin.php:428
+#, php-format
+msgid "%d Site Editor customization"
+msgid_plural "%d Site Editor customizations"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-ctmaker-admin.php:431
+msgid "The parent had no saved settings to copy."
+msgstr ""
+
+#. translators: %s: list of copied settings.
+#: includes/class-ctmaker-admin.php:434
+#, php-format
+msgid "Copied from the parent: %s."
+msgstr ""
+
+#. translators: %d: number of items.
+#: includes/class-ctmaker-admin.php:438
+#, php-format
+msgid "%d Site Editor item already existed in the child and was kept."
+msgid_plural "%d Site Editor items already existed in the child and were kept."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-ctmaker-admin.php:450
+msgid "Sorry, you are not allowed to access this page."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:488
+msgid "Create"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:493
+msgid "Your child themes"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:518
+msgid "Next steps"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:522
+msgid "Activate"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:529
+msgid "Live preview"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:541
+#: includes/class-ctmaker-admin.php:758
+msgid "Override parent templates"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:544
+#: includes/class-ctmaker-admin.php:741
+msgid "Download .zip"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:547
+msgid "Put your changes in the child theme: CSS in its style.css, PHP in its functions.php, and template edits in copies made from the \"Your child themes\" tab. Parent theme updates will no longer overwrite them."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:570
+msgid "No installed theme can be used as a parent."
+msgstr ""
+
+#. translators: %s: active theme name.
+#: includes/class-ctmaker-admin.php:597
+#, php-format
+msgid "You are using %s directly. Edits to its files are lost on the next theme update. A child theme keeps your changes safe and inherits everything else from the parent."
+msgstr ""
+
+#. translators: 1: active child theme name, 2: its parent name.
+#: includes/class-ctmaker-admin.php:605
+#, php-format
+msgid "Your active theme %1$s is already a child theme of %2$s."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:616
+msgid "Pick the parent theme"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:618
+msgid "Parent theme"
+msgstr ""
+
+#. translators: 1: theme name, 2: version, 3: "block theme" or "classic theme".
+#: includes/class-ctmaker-admin.php:632
+#, php-format
+msgid "%1$s %2$s (%3$s)"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:635
+msgid "block theme"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:635
+msgid "classic theme"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:644
+msgid "Name it"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:647
+msgid "Theme name"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:651
+msgid "Folder name"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:654
+msgid "Lowercase letters, numbers and hyphens. It cannot be changed later."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:658
+msgid "Description"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:662
+msgid "Author"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:666
+msgid "Author URL"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:670
+msgid "Version"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:675
+msgid "Create it"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:678
+msgid "Copy my settings from the parent: Customizer settings, menu locations, widgets, Additional CSS and Site Editor changes. Without this, switching to the child shows the parent's defaults."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:681
+msgid "Activate the child theme now"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:687
+msgid "Download as .zip instead"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:702
+msgid "There are no child themes yet."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:702
+msgid "Create one"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:722
+msgid "Child theme:"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:726
+msgid "Show"
+msgstr ""
+
+#. translators: 1: parent theme name, 2: folder name.
+#: includes/class-ctmaker-admin.php:732
+#, php-format
+msgid "Child of %1$s, in the folder %2$s."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:737
+msgid "Active"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:749
+msgid "Replace this child theme's Customizer settings with the parent's?"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:749
+msgid "Copy settings from the parent again"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:750
+msgid "Replaces the child's Customizer settings, menu locations, widgets and Additional CSS with the parent's. Site Editor templates and styles the child already has are kept."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:759
+msgid "Copy a parent file into the child theme, then edit the copy. WordPress uses the child's copy and parent updates leave it alone."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:761
+msgid "The parent theme has no template files that can be overridden this way."
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:770
+msgid "Filter files"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:771
+msgid "Filter files…"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:777
+msgid "in child"
+msgstr ""
+
+#: includes/class-ctmaker-admin.php:784
+msgid "Copy selected files to the child theme"
+msgstr ""
+
+#. translators: %s: parent theme name.
+#: includes/class-ctmaker-generator.php:69
+#, php-format
+msgid "%s Child"
+msgstr ""
+
+#: includes/class-ctmaker-generator.php:108
+msgid "Add your custom CSS below this line."
+msgstr ""
+
+#: includes/class-ctmaker-generator.php:187
+msgid "Enter a name for the child theme."
+msgstr ""
+
+#: includes/class-ctmaker-generator.php:192
+msgid "The folder name can only use lowercase letters, numbers and hyphens."
+msgstr ""
+
+#: includes/class-ctmaker-generator.php:200
+msgid "The author URL is not a valid web address."
+msgstr ""
+
+#: includes/class-ctmaker-generator.php:205
+msgid "Use a version like 1.0.0."
+msgstr ""
+
+#: includes/class-ctmaker-zip.php:38
+msgid "This server cannot create .zip files (the PHP Zip extension is missing)."
+msgstr ""
+
+#: includes/class-ctmaker-zip.php:45
+msgid "Could not create the .zip file in the temporary folder."
+msgstr ""
+
+#: includes/class-ctmaker-zip.php:98
+msgid "Could not read the .zip file."
+msgstr ""
