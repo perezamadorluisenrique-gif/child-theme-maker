@@ -3,7 +3,7 @@
 # leaving out the top-level entries listed in .distignore.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-rm -rf build
+rm -rf build/child-theme-maker build/child-theme-maker.zip
 mkdir -p build/child-theme-maker
 shopt -s dotglob
 for entry in *; do

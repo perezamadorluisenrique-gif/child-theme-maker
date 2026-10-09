@@ -53,6 +53,7 @@ jobs:
     name: Browser test on WordPress ${{ matrix.wp }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         include:
           - wp: '7.1.3'
