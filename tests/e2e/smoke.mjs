@@ -57,8 +57,8 @@ async function createChild( parent, { carry = true, activate = true } = {} ) {
 	if ( ! carry ) await page.uncheck( 'input[name=ctmaker_carry]' );
 	if ( activate ) await page.check( 'input[name=ctmaker_activate]' );
 	await page.click( 'button.button-primary' );
-	await page.waitForSelector( '.notice' );
-	return { slug, notice: await page.textContent( '.notice' ) };
+	await page.waitForSelector( '.ctmaker-notice' );
+	return { slug, notice: await page.textContent( '.ctmaker-notice' ) };
 }
 
 // ---- 1. Classic parent that enqueues its own style.css (Twenty Twenty-One).
@@ -102,7 +102,7 @@ await page.goto( `${ BASE }/wp-admin/themes.php?page=child-theme-maker` );
 await page.selectOption( '#ctmaker_parent', 'twentytwentyone' );
 await page.fill( '#ctmaker_slug', 'twentytwentyone-child' );
 await page.click( 'button.button-primary' );
-check( /already exists/.test( await page.textContent( '.notice-error' ) ), 'existing folder is refused' );
+check( /already exists/.test( await page.textContent( '.ctmaker-notice.notice-error' ) ), 'existing folder is refused' );
 
 // ---- 2. Override tab.
 await page.goto( `${ BASE }/wp-admin/themes.php?page=child-theme-maker&tab=manage&child=twentytwentyone-child` );
@@ -113,7 +113,7 @@ await page.fill( '#ctmaker-filter', 'footer' );
 check( await page.isHidden( 'label:has(code:text-is("header.php"))' ), 'filter hides non-matching files' );
 await page.check( 'input[value="footer.php"]' );
 await page.click( '#ctmaker-override button.button-primary' );
-await page.waitForSelector( '.notice' );
+await page.waitForSelector( '.ctmaker-notice' );
 check( existsSync( join( themes, 'twentytwentyone-child/footer.php' ) ), 'footer.php copied into the child' );
 check( await page.isVisible( '.ctmaker-present:has(code:text-is("footer.php"))' ), 'copied file shown as in child' );
 writeFileSync( join( themes, 'twentytwentyone-child/footer.php' ), readFileSync( join( themes, 'twentytwentyone-child/footer.php' ), 'utf8' ).replace( '</footer>', 'FOOTER-OVERRIDE</footer>' ) );
@@ -177,8 +177,8 @@ check( blockFiles.includes( 'templates/index.html' ) && blockFiles.includes( 'pa
 // Copy settings again keeps existing Site Editor items.
 page.once( 'dialog', ( d ) => d.accept() );
 await page.click( 'button.ctmaker-confirm' );
-await page.waitForSelector( '.notice' );
-check( /already existed in the child and were kept/.test( await page.textContent( '.notice' ) ), 'resync keeps existing Site Editor items' );
+await page.waitForSelector( '.ctmaker-notice' );
+check( /already existed in the child and were kept/.test( await page.textContent( '.ctmaker-notice' ) ), 'resync keeps existing Site Editor items' );
 
 // A parent without Site Editor changes must not pick up another theme's.
 r = await createChild( 'twentytwentytwo', { activate: false } );

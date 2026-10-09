@@ -40,6 +40,8 @@ foreach ( array( 'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY', 'A
 define( 'WP_HOME', '$URL' ); define( 'WP_SITEURL', '$URL' );
 define( 'WP_DEBUG', true ); define( 'WP_DEBUG_LOG', __DIR__ . '/debug.log' ); define( 'WP_DEBUG_DISPLAY', false );
 define( 'FS_METHOD', 'direct' );
+// Keep runs identical with and without internet (no update nags, no update checks).
+define( 'WP_HTTP_BLOCK_EXTERNAL', true );
 if ( ! defined( 'ABSPATH' ) ) { define( 'ABSPATH', __DIR__ . '/' ); }
 require_once ABSPATH . 'wp-settings.php';
 PHP

@@ -480,7 +480,7 @@ class CTMaker_Admin {
 		}
 
 		foreach ( $this->notices as $notice ) {
-			printf( '<div class="notice notice-%1$s"><p>%2$s</p></div>', esc_attr( $notice[0] ), wp_kses_post( $notice[1] ) );
+			printf( '<div class="notice notice-%1$s ctmaker-notice"><p>%2$s</p></div>', esc_attr( $notice[0] ), wp_kses_post( $notice[1] ) );
 		}
 
 		$children = self::children();
