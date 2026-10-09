@@ -50,7 +50,7 @@ jobs:
           include-experimental: true
 
   e2e:
-    name: Browser test on WordPress ${{ matrix.wp }}
+    name: Browser test on WordPress ${{ matrix.wp }}${{ matrix.multisite && ' multisite' || '' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -60,6 +60,9 @@ jobs:
             block: twentytwentyfive
           - wp: '6.3'
             block: twentytwentythree
+          - wp: '7.1.3'
+            block: twentytwentyfive
+            multisite: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -75,3 +78,4 @@ jobs:
         env:
           WP_VERSION: ${{ matrix.wp }}
           BLOCK_PARENT: ${{ matrix.block }}
+          MULTISITE: ${{ matrix.multisite }}

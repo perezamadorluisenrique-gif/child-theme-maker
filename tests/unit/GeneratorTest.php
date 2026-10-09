@@ -42,6 +42,62 @@ class GeneratorTest extends TestCase {
 		$this->assertSame( 'Bold', CTMaker_Generator::clean_header_value( '<b>Bold</b>' ) );
 	}
 
+	/**
+	 * @dataProvider nested_markers
+	 */
+	public function test_nested_comment_markers_are_removed( $name ) {
+		$clean = CTMaker_Generator::clean_header_value( $name );
+		$this->assertStringNotContainsString( '*/', $clean );
+		$this->assertStringNotContainsString( '/*', $clean );
+	}
+
+	public function nested_markers() {
+		return array(
+			'nested close'   => array( "Acme **// echo 'INJECTED'; //**" ),
+			'nested open'    => array( 'My **//theme' ),
+			'deep nesting'   => array( '***///x///***' ),
+			'tag splits it'  => array( '*<b></b>/ end' ),
+			'opener nesting' => array( '//** x **//' ),
+		);
+	}
+
+	/**
+	 * @dataProvider nested_markers
+	 */
+	public function test_functions_php_survives_nested_markers( $name ) {
+		$php = CTMaker_Generator::functions_php( $this->child( array( 'name' => $name ) ) );
+		$this->assertStringNotContainsString( 'echo', $this->php_code_only( $php ), 'Text from the name ran as code.' );
+		$this->assert_valid_php( $php );
+	}
+
+	public function test_style_css_survives_nested_markers() {
+		$css = CTMaker_Generator::style_css( $this->child( array( 'name' => "Acme **// } body{display:none} /*" ) ), $this->parent_facts() );
+		$this->assertSame( 1, substr_count( $css, '*/' ) - 1, 'Only the header close and the trailing hint comment close.' );
+	}
+
+	/**
+	 * Code with comments and strings removed, so injected text that sits
+	 * harmlessly inside a comment is ignored.
+	 */
+	private function php_code_only( $php ) {
+		$code = '';
+		foreach ( token_get_all( $php ) as $token ) {
+			if ( is_array( $token ) && in_array( $token[0], array( T_COMMENT, T_DOC_COMMENT, T_CONSTANT_ENCAPSED_STRING, T_INLINE_HTML ), true ) ) {
+				continue;
+			}
+			$code .= is_array( $token ) ? $token[1] : $token;
+		}
+		return $code;
+	}
+
+	private function assert_valid_php( $php ) {
+		$file = tempnam( sys_get_temp_dir(), 'ctm' );
+		file_put_contents( $file, $php );
+		exec( escapeshellarg( PHP_BINARY ) . ' -l ' . escapeshellarg( $file ) . ' 2>&1', $output, $code );
+		unlink( $file );
+		$this->assertSame( 0, $code, implode( "\n", $output ) );
+	}
+
 	public function test_make_slug() {
 		$this->assertSame( 'mi-tema-hijo', CTMaker_Generator::make_slug( 'Mi Tema  Hijo' ) );
 		$this->assertSame( 'cafe-theme', CTMaker_Generator::make_slug( 'Café Theme!' ) );

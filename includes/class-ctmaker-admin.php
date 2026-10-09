@@ -323,6 +323,8 @@ class CTMaker_Admin {
 			return false;
 		}
 
+		self::allow_on_site( $theme->get_stylesheet() );
+
 		$parts = array(
 			/* translators: 1: child theme name, 2: parent theme name. */
 			sprintf( esc_html__( 'Created %1$s, a child theme of %2$s.', 'child-theme-maker' ), '<strong>' . esc_html( $theme->get( 'Name' ) ) . '</strong>', esc_html( $parent->get( 'Name' ) ) ),
@@ -339,6 +341,25 @@ class CTMaker_Admin {
 
 		$this->notice( 'success', implode( ' ', $parts ) );
 		return true;
+	}
+
+	/**
+	 * On multisite, allows a new theme on the current site only, so it can be
+	 * previewed and activated here without enabling it for the whole network.
+	 *
+	 * @param string $slug Theme folder.
+	 * @return void
+	 */
+	private static function allow_on_site( $slug ) {
+		if ( ! is_multisite() ) {
+			return;
+		}
+		$allowed = get_option( 'allowedthemes' );
+		if ( ! is_array( $allowed ) ) {
+			$allowed = array();
+		}
+		$allowed[ $slug ] = true;
+		update_option( 'allowedthemes', $allowed );
 	}
 
 	/**

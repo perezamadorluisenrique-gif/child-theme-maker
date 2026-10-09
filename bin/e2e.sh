@@ -3,7 +3,8 @@
 # PHP's built-in server. Downloads come from GitHub only (no wordpress.org).
 #
 #   bin/e2e.sh                # WordPress 7.1.3
-#   WP_VERSION=6.3 bin/e2e.sh # oldest supported
+#   WP_VERSION=6.3 BLOCK_PARENT=twentytwentythree bin/e2e.sh # oldest supported
+#   MULTISITE=1 bin/e2e.sh    # network install
 #
 # Needs: php (pdo_sqlite, zip), git, curl, node, and Playwright with Chromium
 # (set NODE_PATH to a global install, or run `npm i playwright` first).
@@ -48,8 +49,20 @@ PHP
 
 WP="php $CACHE/wp-cli.phar --allow-root --path=$SITE"
 $WP core install --url="$URL" --title=E2E --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email >/dev/null 2>&1
-$WP plugin activate child-theme-maker >/dev/null 2>&1
-echo "WordPress $($WP core version 2>/dev/null) on SQLite at $URL"
+if [ -n "${MULTISITE:-}" ]; then
+	# Network install: the plugin is network-activated and every bundled theme is
+	# network-enabled, but a new child theme starts out not allowed on the site.
+	$WP core multisite-convert --title=E2E >/dev/null 2>&1
+	# WP-CLI only edits wp-config.php files that carry the stock "stop editing" marker.
+	sed -i "s#^if ( ! defined( 'ABSPATH' ) )#define( 'MULTISITE', true ); define( 'SUBDOMAIN_INSTALL', false ); define( 'DOMAIN_CURRENT_SITE', 'localhost:$PORT' ); define( 'PATH_CURRENT_SITE', '/' ); define( 'SITE_ID_CURRENT_SITE', 1 ); define( 'BLOG_ID_CURRENT_SITE', 1 );\nif ( ! defined( 'ABSPATH' ) )#" "$SITE/wp-config.php"
+	$WP plugin activate child-theme-maker --network >/dev/null 2>&1
+	for theme in $($WP theme list --field=name 2>/dev/null); do $WP theme enable "$theme" --network >/dev/null 2>&1; done
+	MODE=multisite
+else
+	$WP plugin activate child-theme-maker >/dev/null 2>&1
+	MODE="single site"
+fi
+echo "WordPress $($WP core version 2>/dev/null) ($MODE) on SQLite at $URL"
 
 php -S "localhost:$PORT" -t "$SITE" >"$ROOT/build/e2e-server.log" 2>&1 &
 SERVER=$!

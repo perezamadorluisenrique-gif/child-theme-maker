@@ -144,7 +144,15 @@ check( ! existsSync( join( themes, 'twentytwentytwo-child' ) ), 'zip-only downlo
 
 // ---- 4. Parent that loads get_stylesheet_uri() (Twenty Seventeen).
 wp( 'theme activate twentyseventeen' );
-r = await createChild( 'twentyseventeen', { carry: false } );
+r = await createChild( 'twentyseventeen', { carry: false, activate: false } );
+// The next-step buttons must work, including on multisite where a new theme is not yet allowed on the site.
+const previewHref = await page.getAttribute( 'a:text-is("Live preview")', 'href' );
+const previewStatus = ( await page.request.get( previewHref ) ).status();
+check( previewStatus === 200, `Live preview opens (${ previewStatus })` );
+await page.click( 'a:text-is("Activate")' );
+await page.waitForLoadState();
+const activated = wp( 'option get stylesheet' ) === 'twentyseventeen-child';
+check( activated, `Activate button switches to the child${ activated ? '' : ': ' + ( await page.textContent( 'body' ) ).replace( /\s+/g, ' ' ).trim().slice( 0, 120 ) }` );
 html = await front();
 const p17 = html.indexOf( 'themes/twentyseventeen/style.css' );
 const c17 = html.indexOf( 'themes/twentyseventeen-child/style.css' );

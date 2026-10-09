@@ -38,9 +38,14 @@ class CTMaker_Generator {
 	 */
 	public static function clean_header_value( $value ) {
 		$value = (string) $value;
-		$value = preg_replace( '/[\r\n\t]+/', ' ', $value );
-		$value = str_replace( array( '*/', '/*' ), '', $value );
-		$value = wp_strip_all_tags( $value );
+		// Repeat until stable: removing one marker or tag can join the
+		// characters around it into a new one ("**//" holds "*/" twice).
+		do {
+			$before = $value;
+			$value  = wp_strip_all_tags( $value );
+			$value  = preg_replace( '/[\r\n\t]+/', ' ', $value );
+			$value  = str_replace( array( '*/', '/*' ), '', $value );
+		} while ( $value !== $before );
 		return trim( preg_replace( '/\s{2,}/', ' ', $value ) );
 	}
 
@@ -124,7 +129,9 @@ class CTMaker_Generator {
 	 * @return string
 	 */
 	public static function functions_php( array $child ) {
-		$name = self::clean_header_value( $child['name'] );
+		// Only the docblock uses the name; without * and / nothing in it can
+		// end the comment, whatever the header cleaning lets through.
+		$name = trim( str_replace( array( '*', '/' ), '', self::clean_header_value( $child['name'] ) ) );
 
 		$template = file_get_contents( __DIR__ . '/templates/child-functions.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local template bundled with the plugin.
 		return str_replace( array( '{{THEME_NAME}}', '{{THEME_SLUG}}' ), array( $name, self::make_slug( $child['slug'] ?? '' ) ), (string) $template );
