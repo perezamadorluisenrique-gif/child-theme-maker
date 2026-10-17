@@ -88,21 +88,17 @@ class CTMaker_Zip {
 	 * @return void
 	 */
 	public static function send( $path, $filename ) {
-		// The temp folder is always local, whatever transport WP_Filesystem uses.
-		require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-		require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
-		$contents = ( new WP_Filesystem_Direct( null ) )->get_contents( $path );
-		wp_delete_file( $path );
-
-		if ( false === $contents ) {
+		if ( ! is_readable( $path ) ) {
 			wp_die( esc_html__( 'Could not read the .zip file.', 'child-theme-maker' ) );
 		}
 
 		nocache_headers();
 		header( 'Content-Type: application/zip' );
 		header( 'Content-Disposition: attachment; filename="' . sanitize_file_name( $filename ) . '"' );
-		header( 'Content-Length: ' . strlen( $contents ) );
-		echo $contents; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary zip download.
+		header( 'Content-Length: ' . (int) filesize( $path ) );
+		// Streams the temp file instead of echoing a variable, so there is no output to escape.
+		readfile( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- Streams a local temp file to the browser.
+		wp_delete_file( $path );
 		exit;
 	}
 }

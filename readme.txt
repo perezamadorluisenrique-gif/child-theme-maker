@@ -4,7 +4,7 @@ Tags: child theme, child themes, create child theme, theme, block theme
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,10 +92,17 @@ Users who can install themes (administrators on single sites, super admins on mu
 
 == Changelog ==
 
+= 1.0.1 =
+* The .zip download now streams the file from a temporary location instead of loading it into memory, so large child themes download reliably.
+* Internal: index.php files in every folder, and translations are now delivered by translate.wordpress.org.
+
 = 1.0.0 =
 * First release: three-step child theme creation for classic and block themes, settings carry-over, template overrides and .zip download.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+More reliable .zip downloads.
 
 = 1.0.0 =
 First release.
