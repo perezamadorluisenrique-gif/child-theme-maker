@@ -18,6 +18,6 @@ See the table in README.md. Every gate before a PR is "ready for review": `compo
 - Plugin Check forbids heredoc, `suppress_filters => true`, and private core functions such as `wp_get_sidebars_widgets()`.
 - WP_Query drops a `tax_query` when `name` is set (single-post lookup). Use `post_name__in`.
 - Core de-duplicates `wp_template` slugs against the active theme while a new post has no `wp_theme` term yet; the copier re-saves the slug after setting the term.
-- Text domain `child-theme-maker`; regenerate the .pot when strings change.
+- Text domain `child-theme-maker`. Do not ship translation files: `languages/` is in `.distignore`, the .pot is a dev artifact, no `load_plugin_textdomain()`. Gate: `bash /mnt/project-files/tools/wporg-gate.sh build/child-theme-maker --prefix ctmaker --zip build/child-theme-maker.zip` (skill wprequirements).
 - Requires WP 6.3 (Site Editor theme preview link), PHP 7.4.
 - The cloud sandbox can't reach wordpress.org downloads or Docker; `bin/e2e.sh` pulls WordPress, WP-CLI and the SQLite drop-in from GitHub instead.
