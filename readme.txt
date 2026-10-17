@@ -1,5 +1,5 @@
 === Child Theme Maker ===
-Contributors: wporg-username
+Contributors: lenrique5454
 Tags: child theme, child themes, create child theme, theme, block theme
 Requires at least: 6.3
 Tested up to: 7.1
