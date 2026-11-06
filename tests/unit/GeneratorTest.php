@@ -204,7 +204,19 @@ class GeneratorTest extends TestCase {
 			'empty slug'      => array( array( 'slug' => '' ), array(), 'lowercase' ),
 			'existing folder' => array( array(), array( 'twentytwentyone-child' ), 'already exists' ),
 			'bad url'         => array( array( 'author_uri' => 'javascript:alert(1)' ), array(), 'not a valid' ),
+			'ftp url'         => array( array( 'author_uri' => 'ftp://example.com/x' ), array(), 'not a valid' ),
+			'no host'         => array( array( 'author_uri' => 'https://' ), array(), 'not a valid' ),
 			'bad version'     => array( array( 'version' => '1.0 beta' ), array(), 'version' ),
 		);
+	}
+
+	public function test_intranet_author_url_is_accepted_without_dns() {
+		$child = array(
+			'name'       => 'My Child',
+			'slug'       => 'my-child',
+			'author_uri' => 'http://intranet.local/team',
+			'version'    => '1.0.0',
+		);
+		$this->assertSame( array(), CTMaker_Generator::validate( $child, array() ) );
 	}
 }

@@ -32,8 +32,8 @@ function wp_json_encode( $data, $flags = 0 ) {
 	return json_encode( $data, $flags );
 }
 
-function wp_http_validate_url( $url ) {
-	return filter_var( $url, FILTER_VALIDATE_URL ) && preg_match( '#^https?://#', $url ) ? $url : false;
+function wp_parse_url( $url ) {
+	return parse_url( $url );
 }
 
 require_once dirname( __DIR__, 2 ) . '/includes/class-ctmaker-generator.php';

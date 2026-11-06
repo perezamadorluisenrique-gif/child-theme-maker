@@ -100,7 +100,7 @@ class CTMaker_Templates {
 				if ( ! in_array( strtolower( $entry ), $skip, true ) && ! is_link( $path ) ) {
 					$out = array_merge( $out, self::scan( $root, $rel, $exts, $depth - 1, $skip ) );
 				}
-			} elseif ( in_array( strtolower( pathinfo( $entry, PATHINFO_EXTENSION ) ), $exts, true ) ) {
+			} elseif ( ! is_link( $path ) && in_array( strtolower( pathinfo( $entry, PATHINFO_EXTENSION ) ), $exts, true ) ) {
 				$out[] = $rel;
 			}
 			if ( count( $out ) >= self::MAX_FILES ) {

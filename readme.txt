@@ -8,7 +8,7 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Create a safe child theme for any classic or block theme in three steps, keep your Customizer and Site Editor settings, and override templates.
+Create a working child theme for any classic or block theme in three steps, keep your Customizer and Site Editor settings, and override templates.
 
 == Description ==
 

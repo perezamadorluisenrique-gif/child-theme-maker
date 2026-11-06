@@ -203,7 +203,7 @@ class CTMaker_Generator {
 		}
 
 		$author_uri = $child['author_uri'] ?? '';
-		if ( '' !== $author_uri && ! wp_http_validate_url( $author_uri ) ) {
+		if ( '' !== $author_uri && ! self::is_web_address( $author_uri ) ) {
 			$errors[] = __( 'The author URL is not a valid web address.', 'child-theme-maker' );
 		}
 
@@ -255,5 +255,20 @@ class CTMaker_Generator {
 			}
 		}
 		return '';
+	}
+
+	/**
+	 * Whether a string is an http(s) address with a host. Pure syntax check: no DNS lookup.
+	 *
+	 * @param string $uri Address.
+	 * @return bool
+	 */
+	private static function is_web_address( $uri ) {
+		$parts = wp_parse_url( $uri );
+		return is_array( $parts )
+			&& ! empty( $parts['host'] )
+			&& isset( $parts['scheme'] )
+			&& in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true )
+			&& false !== filter_var( $uri, FILTER_VALIDATE_URL );
 	}
 }
