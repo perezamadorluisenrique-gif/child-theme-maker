@@ -51,7 +51,7 @@ jobs:
 
   e2e:
     name: Browser test on WordPress ${{ matrix.wp }}${{ matrix.multisite && ' multisite' || '' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
