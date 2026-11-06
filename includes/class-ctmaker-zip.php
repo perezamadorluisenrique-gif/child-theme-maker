@@ -92,6 +92,11 @@ class CTMaker_Zip {
 			wp_die( esc_html__( 'Could not read the .zip file.', 'child-theme-maker' ) );
 		}
 
+		// Drop anything another plugin already buffered, so it cannot end up inside the zip.
+		while ( ob_get_level() > 0 ) {
+			ob_end_clean();
+		}
+		ignore_user_abort( true );
 		nocache_headers();
 		header( 'Content-Type: application/zip' );
 		header( 'Content-Disposition: attachment; filename="' . sanitize_file_name( $filename ) . '"' );
