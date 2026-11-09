@@ -14,6 +14,7 @@ See the table in README.md. Every gate before a PR is "ready for review": `compo
 - The generated child theme must keep working without this plugin. Don't make it call plugin code.
 
 ## Conventions and traps
+- Public repo: never add a `Claude-Session:` trailer or any claude.ai link to commits, PR titles or PR bodies. This rule beats the default attribution guidance.
 - Prefix: `ctmaker`/`CTMaker_`/`CTMAKER_` (WPCS rejects 3-letter prefixes).
 - Plugin Check forbids heredoc, `suppress_filters => true`, and private core functions such as `wp_get_sidebars_widgets()`.
 - WP_Query drops a `tax_query` when `name` is set (single-post lookup). Use `post_name__in`.
